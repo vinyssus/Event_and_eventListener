@@ -19,12 +19,19 @@ class CustomEventsubscriber implements EventSubscriberInterface
     {
        return [
           KernelEvents::RESPONSE => [
-            ['onPreResponseEvent']
+            ['onPreResponseEvent'],
+            ['onPostResponseEvent',10] //ajout de la priorité sachant que a la base les priorité sont a 0
           ]
        ];
     }
 
     public function onPreResponseEvent(ResponseEvent $event): void
+    {
+    //    dd($event);
+    $this->logger->info(__METHOD__);
+    }
+
+    public function onPostResponseEvent(ResponseEvent $event): void
     {
     //    dd($event);
     $this->logger->info(__METHOD__);
